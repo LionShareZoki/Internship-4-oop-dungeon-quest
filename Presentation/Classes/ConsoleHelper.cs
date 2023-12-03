@@ -10,7 +10,6 @@ namespace Presentation.Repositories
             int option;
             do
             {
-                Console.WriteLine("Input your option: ");
                 isNumber = Int32.TryParse(Console.ReadLine(), out option);
             }
             while (!isNumber);
