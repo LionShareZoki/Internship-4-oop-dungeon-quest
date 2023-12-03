@@ -17,10 +17,11 @@ public class MonsterConsole
 
     public List<Monster> RunMonsterConsole()
     {
-        Console.WriteLine("Are you ready to see who you are fighting against? (Y/N)");
+        Console.Clear();
+        Console.WriteLine("Are you ready to fight? (Y/N)");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-           return GenerateMonsters();
+            return GenerateMonsters();
         }
         return new List<Monster>();
     }
@@ -29,7 +30,6 @@ public class MonsterConsole
     {
         List<Monster> monsters = monstersGenerator.GenerateRandomMonsters(10);
 
-        Console.WriteLine("Generated 10 monsters:");
 
         int bruteCount = 0;
         int goblinCount = 0;
@@ -50,10 +50,12 @@ public class MonsterConsole
                 witchCount++;
             }
         }
-
-        Console.WriteLine($"Brute Count: {bruteCount}");
-        Console.WriteLine($"Goblin Count: {goblinCount}");
-        Console.WriteLine($"Witch Count: {witchCount}");
+        Console.Clear();
+        Console.WriteLine("You are fighting against:");
+        Console.WriteLine($"{bruteCount} brutes");
+        Console.WriteLine($"{goblinCount} goblins");
+        Console.WriteLine($"{witchCount} witches");
+        Console.ReadLine();
 
         return monsters;
     }
