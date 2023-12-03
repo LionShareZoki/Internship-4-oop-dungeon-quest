@@ -18,7 +18,9 @@ namespace Domain.Repositories.Attacks
 
                 if (monster.HealthPoints <= 0)
                 {
-                    enchanter.HealthPoints += enchanter.HealthPoints * 0.25;
+                    Console.WriteLine("You killed this one, Good Job!");
+                    Console.ReadKey();
+                    enchanter.HealthPoints += enchanter.HealthPoints * 0.05;
                     enchanter.Mana += 100;
                     enchanter.Experience += monster.ExperiencePrize;
                     if (enchanter.Experience > 80)
@@ -26,6 +28,7 @@ namespace Domain.Repositories.Attacks
                         enchanter.Level++;
                         enchanter.HealthPoints += 10;
                         enchanter.DamagePoints += 6;
+                        enchanter.Experience -= 80;
                     }
                 }
             }

@@ -6,15 +6,15 @@ namespace Domain.Repositories.Attacks
 {
     public static class BruteAttack
     {
-        public static bool PerformBruteAttack(Hero hero, Brute brute)
+        public static void PerformBruteAttack(Hero hero, Brute brute)
         {
             var damage = new Random().Next(0, 100) >= 10 ? brute.DamagePoints : hero.HealthPoints * (brute.DamagePoints / 100);
             hero.HealthPoints -= damage;
-            if (hero.HealthPoints < 0)
+            if (hero.HealthPoints <= 0)
             {
-                return false;
+                Console.WriteLine("You lost :(");
+                Console.ReadKey();
             }
-            else return true;
         }
     }
 }

@@ -25,9 +25,16 @@ namespace Domain.Repositories.Attacks
             }
             else if (monster.HealthPoints <= 0)
             {
-                marksman.HealthPoints += marksman.HealthPoints * 0.25;
+                Console.WriteLine("You killed this one, Good Job!");
+                Console.ReadKey();
+                marksman.HealthPoints += marksman.HealthPoints * 0.05;
                 marksman.Experience += monster.ExperiencePrize;
-                if (marksman.Experience > 80) marksman.Level++;
+                if (marksman.Experience > 80) {
+                    marksman.Level++;
+                    marksman.HealthPoints += 10;
+                    marksman.DamagePoints += 10;
+                    marksman.Experience -= 80;
+                }
             }
         }
 

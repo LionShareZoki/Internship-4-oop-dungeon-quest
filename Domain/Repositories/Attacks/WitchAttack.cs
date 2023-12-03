@@ -10,10 +10,13 @@ namespace Domain.Repositories.Attacks
             var damage = new Random().Next(0, 100) >= 10 ? witch.DamagePoints : 0;
             hero.HealthPoints -= damage;
             if (damage == 0) PerformDumbus(hero, monsters);
+            if(hero.HealthPoints <= 0) Console.WriteLine("You lost :(");
         }
 
         private static void PerformDumbus(Hero hero, List<Monster> monsters)
         {
+            Console.WriteLine($"Witch performing dumbus...");
+            Console.ReadKey();
             hero.HealthPoints = new Random().Next(20, 140);
             foreach (var monster in monsters)
             {

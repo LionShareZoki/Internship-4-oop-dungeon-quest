@@ -20,13 +20,15 @@ namespace Domain.Repositories.Attacks
             if (monster.HealthPoints <= 0)
             {
                 Console.WriteLine("You killed this one, Good Job!");
-                gladiator.HealthPoints += gladiator.HealthPoints * 0.25;
+                Console.ReadKey();
+                gladiator.HealthPoints += gladiator.HealthPoints * 0.05;
                 gladiator.Experience += monster.ExperiencePrize;
                 if (gladiator.Experience > 80)
                 {
                     gladiator.Level++;
                     gladiator.HealthPoints += 10;
                     gladiator.DamagePoints += 3;
+                    gladiator.Experience -= 80;
                 };
             }
 
