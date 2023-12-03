@@ -4,7 +4,7 @@ using Domain.Repositories;
 
 using Presentation.Repositories;
 
-internal class MonsterConsole
+public class MonsterConsole
 {
     private readonly ConsoleHelper consoleHelper;
     private readonly MonstersGenerator monstersGenerator;
@@ -15,16 +15,17 @@ internal class MonsterConsole
         monstersGenerator = new MonstersGenerator();
     }
 
-    public void RunMonsterConsole()
+    public List<Monster> RunMonsterConsole()
     {
         Console.WriteLine("Are you ready to see who you are fighting against? (Y/N)");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            GenerateMonsters();
+           return GenerateMonsters();
         }
+        return new List<Monster>();
     }
 
-    private void GenerateMonsters()
+    private List<Monster> GenerateMonsters()
     {
         List<Monster> monsters = monstersGenerator.GenerateRandomMonsters(10);
 
@@ -53,5 +54,7 @@ internal class MonsterConsole
         Console.WriteLine($"Brute Count: {bruteCount}");
         Console.WriteLine($"Goblin Count: {goblinCount}");
         Console.WriteLine($"Witch Count: {witchCount}");
+
+        return monsters;
     }
 }
