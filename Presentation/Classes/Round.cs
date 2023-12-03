@@ -1,11 +1,8 @@
 ﻿using Data.Enums;
-using Data.Models.Heroes;
-using Data.Models.Heros;
 using Data.Models.Monsters;
 using Data.Repositories;
 
 using Domain.Repositories;
-using Domain.Repositories.Attacks;
 using Domain.Services;
 
 namespace Presentation.Classes
@@ -16,7 +13,7 @@ namespace Presentation.Classes
         {
             Console.Clear();
             while (HeroGenerator.createdHeroes[0].HealthPoints > 0 && monsters.Count > 0)
-            {   
+            {
                 Console.Clear();
                 GameMonitor.GameDataMonitor(HeroGenerator.createdHeroes[0], monsters);
                 Console.WriteLine("It's your turn to play: Direct, Side, or Counter");
@@ -24,7 +21,7 @@ namespace Presentation.Classes
 
                 if (Enum.TryParse<Attack>(heroChoice, ignoreCase: true, out var attackChoice))
                 {
-                    Console.WriteLine($"You chose: {attackChoice}");
+                    Console.WriteLine($"You have chosen: {attackChoice}");
                     Console.ReadKey();
                 }
                 else
@@ -37,7 +34,7 @@ namespace Presentation.Classes
                 Random random = new Random();
                 var monsterChoice = possibleMonsterChoices[random.Next(possibleMonsterChoices.Length)];
 
-                Console.WriteLine($"Monster chose: {monsterChoice}");
+                Console.WriteLine($"{monsters[0].Name} has chosen: {monsterChoice}");
                 Console.ReadKey();
                 bool heroOrMonster = false;
                 if (attackChoice == monsterChoice)
