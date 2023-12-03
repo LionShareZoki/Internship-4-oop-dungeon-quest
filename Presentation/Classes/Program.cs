@@ -1,8 +1,10 @@
 ﻿using Data.Enums;
 using Data.Models.Heroes;
 using Data.Models.Heros;
+using Data.Models.Monsters;
 using Data.Repositories;
 
+using Presentation.Classes;
 using Presentation.Repositories;
 
 namespace HeroGeneratorConsole
@@ -12,6 +14,7 @@ namespace HeroGeneratorConsole
         private static void Main()
         {
             ConsoleHelper consoleHelper = new ConsoleHelper();
+            Round round = new Round();
 
             var mainMenuOptions = new Dictionary<int, Action>
             {
@@ -31,7 +34,8 @@ namespace HeroGeneratorConsole
 
             // After hero creation, automatically generate monsters
             MonsterConsole monsterConsole = new MonsterConsole();
-            monsterConsole.RunMonsterConsole();
+            List<Monster> monsters = monsterConsole.RunMonsterConsole();
+            Round.RoundAction(monsters);
         }
 
         private static void GenerateHero(ConsoleHelper consoleHelper)
