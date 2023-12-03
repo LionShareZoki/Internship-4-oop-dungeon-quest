@@ -14,16 +14,18 @@ namespace Domain.Repositories.Attacks
             int totalDamage = shouldRage ? baseDamage * 2 : baseDamage;
 
             if (shouldRage) gladiator.HealthPoints -= gladiator.HealthPoints * 0.1;
-
+            monster.HealthPoints -= totalDamage;
+            Console.WriteLine($"You gave him {totalDamage} and his health now is {monster.HealthPoints}");
 
             if (monster.HealthPoints <= 0)
             {
+                Console.WriteLine("You killed this one, Good Job!");
                 gladiator.HealthPoints += gladiator.HealthPoints * 0.25;
                 gladiator.Experience += monster.ExperiencePrize;
-                if (gladiator.Experience > 80) 
+                if (gladiator.Experience > 80)
                 {
                     gladiator.Level++;
-                    gladiator.HealthPoints += 10;    
+                    gladiator.HealthPoints += 10;
                     gladiator.DamagePoints += 3;
                 };
             }

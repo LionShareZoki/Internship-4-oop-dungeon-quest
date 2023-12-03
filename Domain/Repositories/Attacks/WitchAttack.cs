@@ -1,21 +1,24 @@
-﻿
-using Data.Models.Heroes;
+﻿using Data.Models.Heroes;
 using Data.Models.Monsters;
 
 namespace Domain.Repositories.Attacks
 {
-    internal class WitchAttack
+    public static class WitchAttack
     {
-        public (bool, bool) PerformWitchAttack(Hero hero, Witch witch)
+        public static void PerformWitchAttack(Hero hero, Witch witch, List<Monster> monsters)
         {
             var damage = new Random().Next(0, 100) >= 10 ? witch.DamagePoints : 0;
             hero.HealthPoints -= damage;
-            if (hero.HealthPoints < 0)
+            if (damage == 0) PerformDumbus(hero, monsters);
+        }
+
+        private static void PerformDumbus(Hero hero, List<Monster> monsters)
+        {
+            hero.HealthPoints = new Random().Next(20, 140);
+            foreach (var monster in monsters)
             {
-                return (false, false);
+                monster.HealthPoints = new Random().Next(5, 100);
             }
-            else if (damage == 0) return (true, true);
-            else return (true, false);
         }
     }
 }

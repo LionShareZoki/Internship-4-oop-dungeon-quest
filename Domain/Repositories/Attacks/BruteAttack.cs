@@ -4,9 +4,9 @@ using Data.Models.Monsters;
 
 namespace Domain.Repositories.Attacks
 {
-    internal class BruteAttack
+    public static class BruteAttack
     {
-        public bool PerformBruteAttack(Hero hero, Brute brute)
+        public static bool PerformBruteAttack(Hero hero, Brute brute)
         {
             var damage = new Random().Next(0, 100) >= 10 ? brute.DamagePoints : hero.HealthPoints * (brute.DamagePoints / 100);
             hero.HealthPoints -= damage;
