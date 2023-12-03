@@ -27,11 +27,13 @@ namespace Domain.Services
                     if (firstMonster.HealthPoints <= 0)
                     {
                         monsters.Remove(firstMonster);
-                        if (firstMonster is Witch innerWitch && !innerWitch.HasDied)
-                        {
-                            monstersGenerator.GenerateRandomMonsters(2);
-                            innerWitch.HasDied = true;
-                        }
+                    }
+                    if (firstMonster is Witch && firstMonster.HealthPoints <= 0)
+                    {
+                        var newMonsters = monstersGenerator.GenerateRandomMonsters(2);
+                        monsters.AddRange(newMonsters);
+                        Console.WriteLine("Witch died, but 2 more monsters have spawned");
+                        Console.ReadKey();
                     }
                 }
 
@@ -41,11 +43,13 @@ namespace Domain.Services
                     if (firstMonster.HealthPoints <= 0)
                     {
                         monsters.Remove(firstMonster);
-                        if (firstMonster is Witch innerWitch && !innerWitch.HasDied)
-                        {
-                            monstersGenerator.GenerateRandomMonsters(2);
-                            innerWitch.HasDied = true;
-                        }
+                    }
+                    if (firstMonster is Witch && firstMonster.HealthPoints <= 0)
+                    {
+                        var newMonsters = monstersGenerator.GenerateRandomMonsters(2);
+                        monsters.AddRange(newMonsters);
+                        Console.WriteLine("Witch died, but 2 more monsters have spawned");
+                        Console.ReadKey();
                     }
                 }
 
@@ -55,11 +59,13 @@ namespace Domain.Services
                     if (firstMonster.HealthPoints <= 0)
                     {
                         monsters.Remove(firstMonster);
-                        if (firstMonster is Witch gameWitch && !gameWitch.HasDied)
-                        {
-                            monstersGenerator.GenerateRandomMonsters(2);
-                            gameWitch.HasDied = true;
-                        }
+                    }
+                    if (firstMonster is Witch && firstMonster.HealthPoints <= 0)
+                    {
+                        var newMonsters = monstersGenerator.GenerateRandomMonsters(2);
+                        monsters.AddRange(newMonsters);
+                        Console.WriteLine("Witch died, but 2 more monsters have spawned");
+                        Console.ReadKey();
                     }
                 }
 
@@ -72,7 +78,7 @@ namespace Domain.Services
                         Console.WriteLine("RIP");
                         Console.ReadKey();
                         if (someEnchanter.HasDied != true)
-                        {   
+                        {
                             someEnchanter.HealthPoints += new Random().Next(50, 70);
                             Console.WriteLine("Welcome back!");
                             Console.ReadKey();
@@ -102,7 +108,7 @@ namespace Domain.Services
 
                 if (firstMonster is Witch witch && hasWon)
                 {
-                    WitchAttack.PerformWitchAttack(hero, witch, monsters);
+                    WitchAttack.PerformWitchAttack(hero, witch, monsters, monstersGenerator);
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {
@@ -119,7 +125,8 @@ namespace Domain.Services
                 }
 
             }
-            else { Console.WriteLine("You won! Congratulations!"); }
+            if (monsters.Count == 0)
+                Console.WriteLine("You won! Congratulations!");
         }
     }
 }
