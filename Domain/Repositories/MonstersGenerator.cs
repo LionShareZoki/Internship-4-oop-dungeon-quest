@@ -5,6 +5,13 @@ namespace Domain.Repositories
 {
     public class MonstersGenerator
     {
+        public List<Monster> Monsters { get; private set; }
+
+        public MonstersGenerator()
+        {
+            Monsters = new List<Monster>();
+        }
+
         public List<Monster> GenerateRandomMonsters(int count)
         {
             List<Monster> monsters = new List<Monster>();
