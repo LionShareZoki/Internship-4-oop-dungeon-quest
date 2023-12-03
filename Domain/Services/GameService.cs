@@ -69,12 +69,15 @@ namespace Domain.Services
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {
+                        Console.WriteLine("RIP");
+                        Console.ReadKey();
                         if (someEnchanter.HasDied != true)
-                        {
+                        {   
                             someEnchanter.HealthPoints += new Random().Next(50, 70);
+                            Console.WriteLine("Welcome back!");
+                            Console.ReadKey();
                             someEnchanter.HasDied = true;
                         }
-                        else if (someEnchanter.HasDied) Console.WriteLine("You lost");
                     }
                 }
 
@@ -84,12 +87,15 @@ namespace Domain.Services
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {
+                        Console.WriteLine("RIP");
+                        Console.ReadKey();
                         if (someEnchanter.HasDied != true)
                         {
+                            Console.WriteLine("Welcome back!");
+                            Console.ReadKey();
                             someEnchanter.HealthPoints += new Random().Next(50, 70);
                             someEnchanter.HasDied = true;
                         }
-                        else if (someEnchanter.HasDied) Console.WriteLine("You lost");
                     }
 
                 }
@@ -100,12 +106,15 @@ namespace Domain.Services
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {
+                        Console.WriteLine("RIP");
+                        Console.ReadKey();
                         if (someEnchanter.HasDied != true)
                         {
+                            Console.WriteLine("Welcome back!");
+                            Console.ReadKey();
                             someEnchanter.HealthPoints += new Random().Next(50, 70);
                             someEnchanter.HasDied = true;
                         }
-                        else if (someEnchanter.HasDied) Console.WriteLine("You lost");
                     }
                 }
 
