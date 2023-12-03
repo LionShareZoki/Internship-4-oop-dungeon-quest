@@ -32,7 +32,6 @@ namespace HeroGeneratorConsole
         {
             GenerateHero(consoleHelper);
 
-            // After hero creation, automatically generate monsters
             MonsterConsole monsterConsole = new MonsterConsole();
             List<Monster> monsters = monsterConsole.RunMonsterConsole();
             Round.RoundAction(monsters);
@@ -40,18 +39,20 @@ namespace HeroGeneratorConsole
 
         private static void GenerateHero(ConsoleHelper consoleHelper)
         {
+            Console.WriteLine("What would you like to be called?");
+            string name = Console.ReadLine();
             Console.WriteLine("Choose a hero type:");
             Dictionary<int, Action> heroTypeMenu = new Dictionary<int, Action>
             {
-                { 1, () => GenerateHero(HerosType.Gladiator, consoleHelper) },
-                { 2, () => GenerateHero(HerosType.Enchanter, consoleHelper) },
-                { 3, () => GenerateHero(HerosType.Marksman, consoleHelper) }
+                { 1, () => GenerateHero(HerosType.Gladiator, consoleHelper, name) },
+                { 2, () => GenerateHero(HerosType.Enchanter, consoleHelper, name) },
+                { 3, () => GenerateHero(HerosType.Marksman, consoleHelper, name) }
             };
 
             consoleHelper.PrintMenu(heroTypeMenu, "");
         }
 
-        private static void GenerateHero(HerosType selectedHeroType, ConsoleHelper consoleHelper)
+        private static void GenerateHero(HerosType selectedHeroType, ConsoleHelper consoleHelper, string name)
         {
             Console.WriteLine("Do you want to customize HealthPoints? (Y/N)");
             int HPInput = Console.ReadLine()?.ToUpper() == "Y" ? consoleHelper.UserInput() : 0;
@@ -59,8 +60,8 @@ namespace HeroGeneratorConsole
             Console.WriteLine("Do you want to customize DamagePoints? (Y/N)");
             int DMGInput = Console.ReadLine()?.ToUpper() == "Y" ? consoleHelper.UserInput() : 0;
 
-            HeroGenerator heroGenerator = new HeroGenerator(selectedHeroType, HPInput, DMGInput);
-            Hero hero = heroGenerator.GenerateHero(selectedHeroType, HPInput, DMGInput);
+            HeroGenerator heroGenerator = new HeroGenerator(selectedHeroType, HPInput, DMGInput, name);
+            Hero hero = heroGenerator.GenerateHero(selectedHeroType, HPInput, DMGInput, name);
 
             Console.WriteLine($"Generated {selectedHeroType} hero:");
             DisplayHeroInfo(hero);
