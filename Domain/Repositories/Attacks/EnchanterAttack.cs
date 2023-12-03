@@ -15,6 +15,8 @@ namespace Domain.Repositories.Attacks
 
                 int damage = CalculateEnchanterDamage(enchanter);
                 monster.HealthPoints -= damage;
+                Console.WriteLine($"You gave him {damage} damage");
+                Console.ReadKey();
 
                 if (monster.HealthPoints <= 0)
                 {
@@ -38,9 +40,12 @@ namespace Domain.Repositories.Attacks
                 {
                     enchanter.Mana -= 10;
                     enchanter.HealthPoints += 15;
+                    Console.WriteLine("Since you were with health, you were recharged for some mana");
+                    Console.ReadKey();
                 }
                 else
                 {
+                    Console.WriteLine("Not enough mana. You will be able to play next one.");
                     enchanter.Mana += 20;
                 }
             }

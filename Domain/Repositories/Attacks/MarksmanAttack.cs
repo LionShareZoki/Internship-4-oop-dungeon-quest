@@ -17,6 +17,12 @@ namespace Domain.Repositories.Attacks
             bool isStun = randomChance2 <= marksman.StunChance;
 
             int damage = CalculateMarksmanDamage(marksman, isCritical);
+            if (isCritical) Console.WriteLine("Critical strike!");
+            Console.ReadKey();
+            if (isStun) Console.WriteLine("You stunned the monster!");
+            Console.ReadKey();
+            Console.WriteLine($"You gave him {damage} damage");
+            Console.ReadKey();
             monster.HealthPoints -= damage;
 
             if (isStun)
@@ -29,7 +35,8 @@ namespace Domain.Repositories.Attacks
                 Console.ReadKey();
                 marksman.HealthPoints += marksman.HealthPoints * 0.05;
                 marksman.Experience += monster.ExperiencePrize;
-                if (marksman.Experience > 80) {
+                if (marksman.Experience > 80)
+                {
                     marksman.Level++;
                     marksman.HealthPoints += 10;
                     marksman.DamagePoints += 10;

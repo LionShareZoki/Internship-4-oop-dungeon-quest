@@ -10,6 +10,8 @@ namespace Domain.Repositories.Attacks
         {
             var damage = new Random().Next(0, 100) >= 10 ? brute.DamagePoints : hero.HealthPoints * (brute.DamagePoints / 100);
             hero.HealthPoints -= damage;
+            Console.WriteLine($"Brute gave you {damage} damage");
+            Console.ReadKey();
             if (hero.HealthPoints <= 0)
             {
                 Console.WriteLine("You lost :(");

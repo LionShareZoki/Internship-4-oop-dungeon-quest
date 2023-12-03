@@ -13,9 +13,15 @@ namespace Domain.Repositories.Attacks
 
             int totalDamage = shouldRage ? baseDamage * 2 : baseDamage;
 
-            if (shouldRage) gladiator.HealthPoints -= gladiator.HealthPoints * 0.1;
+            if (shouldRage)
+            {
+                gladiator.HealthPoints -= gladiator.HealthPoints * 0.1;
+                Console.WriteLine($"You hit him with the Rage!");
+                Console.ReadKey();
+            }
             monster.HealthPoints -= totalDamage;
-            Console.WriteLine($"You gave him {totalDamage} and his health now is {monster.HealthPoints}");
+            Console.WriteLine($"You gave him {totalDamage} damage");
+            Console.ReadKey();
 
             if (monster.HealthPoints <= 0)
             {
