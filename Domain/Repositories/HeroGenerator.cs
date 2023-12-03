@@ -5,10 +5,10 @@ using Data.Models.Heros;
 
 namespace Data.Repositories
 {
-    public class HeroGenerator(HerosType selectedHeroType, int HPInput, int DMGInput)
+    public class HeroGenerator(HerosType selectedHeroType, int HPInput, int DMGInput, string Name)
     {
         public static List<Hero> createdHeroes = new List<Hero>();
-        public Hero GenerateHero(HerosType selectedHeroType, int HPInput, int DMGInput)
+        public Hero GenerateHero(HerosType selectedHeroType, int HPInput, int DMGInput, string Name)
         {
 
             switch (selectedHeroType)
@@ -16,6 +16,7 @@ namespace Data.Repositories
                 case HerosType.Gladiator:
                     Gladiator heroG;
                     heroG = new Gladiator();
+                    heroG.Name = Name;
                     heroG.RageChance = 10;
                     if (HPInput != 0) heroG.HealthPoints = HPInput;
                     else heroG.HealthPoints = new Random().Next(120, 140);
@@ -29,6 +30,7 @@ namespace Data.Repositories
                 case HerosType.Enchanter:
                     Enchanter heroE;
                     heroE = new Enchanter();
+                    heroE.Name = Name;
                     if (HPInput != 0) heroE.HealthPoints = HPInput;
                     else heroE.HealthPoints = new Random().Next(50, 70);
                     if (DMGInput != 0) heroE.DamagePoints = DMGInput;
@@ -43,6 +45,7 @@ namespace Data.Repositories
                 case HerosType.Marksman:
                     Marksman heroM;
                     heroM = new Marksman();
+                    heroM.Name = Name;
                     if (HPInput != 0) heroM.HealthPoints = HPInput;
                     else heroM.HealthPoints = new Random().Next(90, 110);
                     if (DMGInput != 0) heroM.DamagePoints = DMGInput;
