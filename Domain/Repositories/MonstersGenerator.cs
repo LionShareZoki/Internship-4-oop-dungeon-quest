@@ -51,6 +51,7 @@ namespace Domain.Repositories
                 case MonstersType.Brute:
                     return new Brute
                     {
+                        Name = monsterType.ToString(),
                         PercentageAttackChance = 20,
                         DamagePoints = 15,
                         HealthPoints = 20,
@@ -59,6 +60,7 @@ namespace Domain.Repositories
                 case MonstersType.Goblin:
                     return new Goblin
                     {
+                        Name = monsterType.ToString(),
                         SpecialAbilityChance = 0,
                         DamagePoints = 5,
                         HealthPoints = 20,
@@ -67,6 +69,7 @@ namespace Domain.Repositories
                 case MonstersType.Witch:
                     return new Witch
                     {
+                        Name = monsterType.ToString(),
                         DamagePoints = 22,
                         HealthPoints = 30,
                         ExperiencePrize = 20,
