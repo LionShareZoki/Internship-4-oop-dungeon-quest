@@ -53,7 +53,7 @@ namespace Domain.Repositories
                     {
                         Name = monsterType.ToString(),
                         PercentageAttackChance = 20,
-                        DamagePoints = 15,
+                        DamagePoints = 22,
                         HealthPoints = 40,
                         ExperiencePrize = 15
                     };
@@ -62,7 +62,7 @@ namespace Domain.Repositories
                     {
                         Name = monsterType.ToString(),
                         SpecialAbilityChance = 0,
-                        DamagePoints = 7,
+                        DamagePoints = 17,
                         HealthPoints = 30,
                         ExperiencePrize = 10
                     };
@@ -70,7 +70,7 @@ namespace Domain.Repositories
                     return new Witch
                     {
                         Name = monsterType.ToString(),
-                        DamagePoints = 20,
+                        DamagePoints = 28,
                         HealthPoints = 40,
                         ExperiencePrize = 20,
                         HasDied = false,
