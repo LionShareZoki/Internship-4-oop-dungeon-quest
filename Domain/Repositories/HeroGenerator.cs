@@ -18,8 +18,17 @@ namespace Data.Repositories
                     heroG = new Gladiator();
                     heroG.Name = Name;
                     heroG.RageChance = 10;
-                    if (HPInput != 0) heroG.HealthPoints = HPInput;
-                    else heroG.HealthPoints = new Random().Next(120, 140);
+                    if (HPInput != 0)
+                    {
+                        heroG.HealthPoints = HPInput;
+                        heroG.MaxHealthPoints = HPInput;
+                    }
+                    else
+                    {
+                        var hp = new Random().Next(120, 130);
+                        heroG.HealthPoints = hp;
+                        heroG.MaxHealthPoints = hp;
+                    }
                     if (DMGInput != 0) heroG.DamagePoints = DMGInput;
                     else heroG.DamagePoints = new Random().Next(5, 15);
                     heroG.SpecialAbilityChance = 10;
@@ -31,8 +40,17 @@ namespace Data.Repositories
                     Enchanter heroE;
                     heroE = new Enchanter();
                     heroE.Name = Name;
-                    if (HPInput != 0) heroE.HealthPoints = HPInput;
-                    else heroE.HealthPoints = new Random().Next(50, 70);
+                    if (HPInput != 0)
+                    {
+                        heroE.HealthPoints = HPInput;
+                        heroE.MaxHealthPoints = HPInput;
+                    }
+                    else
+                    {
+                        var hp = new Random().Next(120, 130);
+                        heroE.HealthPoints = hp;
+                        heroE.MaxHealthPoints = hp;
+                    }
                     if (DMGInput != 0) heroE.DamagePoints = DMGInput;
                     else heroE.DamagePoints = new Random().Next(25, 35);
                     heroE.SpecialAbilityChance = 10;
@@ -46,8 +64,17 @@ namespace Data.Repositories
                     Marksman heroM;
                     heroM = new Marksman();
                     heroM.Name = Name;
-                    if (HPInput != 0) heroM.HealthPoints = HPInput;
-                    else heroM.HealthPoints = new Random().Next(90, 110);
+                    if (HPInput != 0)
+                    {
+                        heroM.HealthPoints = HPInput;
+                        heroM.MaxHealthPoints = HPInput;
+                    }
+                    else
+                    {
+                        var hp = new Random().Next(120, 130);
+                        heroM.HealthPoints = hp;
+                        heroM.MaxHealthPoints = hp;
+                    }
                     if (DMGInput != 0) heroM.DamagePoints = DMGInput;
                     else heroM.DamagePoints = new Random().Next(15, 20);
                     heroM.SpecialAbilityChance = 10;
