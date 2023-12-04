@@ -3,9 +3,9 @@ using Data.Models.Monsters;
 
 namespace Domain.Repositories.Attacks
 {
-    public static class WitchAttack
+    public class WitchAttack : IWitchAttack
     {
-        public static void PerformWitchAttack(Hero hero, Witch witch, List<Monster> monsters, MonstersGenerator monstersGenerator)
+        public void PerformWitchAttack(Hero hero, Witch witch, List<Monster> monsters, MonstersGenerator monstersGenerator)
         {
             var damage = new Random().Next(0, 100) >= 10 ? witch.DamagePoints : 0;
             hero.HealthPoints -= damage;
@@ -16,7 +16,7 @@ namespace Domain.Repositories.Attacks
 
         }
 
-        private static void PerformDumbus(Hero hero, List<Monster> monsters)
+        private void PerformDumbus(Hero hero, List<Monster> monsters)
         {
             Console.WriteLine($"Witch performing dumbus...");
             Console.ReadKey();

@@ -1,11 +1,13 @@
 ﻿using Data.Models.Heros;
 using Data.Models.Monsters;
 
+using Domain.Repositories.Attack_Interfaces;
+
 namespace Domain.Repositories.Attacks
 {
-    public static class GladiatorAttack
+    public class GladiatorAttack : IGladiatorAttack
     {
-        public static int GetGladiatorAttackDamage(Gladiator gladiator, Monster monster)
+        public int GetGladiatorAttackDamage(Gladiator gladiator, Monster monster)
         {
             int baseDamage = gladiator.DamagePoints;
 
@@ -15,7 +17,7 @@ namespace Domain.Repositories.Attacks
 
             if (shouldRage)
             {
-                gladiator.HealthPoints -= gladiator.HealthPoints * 0.1;
+                gladiator.HealthPoints -= gladiator.MaxHealthPoints * 0.1;
                 Console.WriteLine($"You hit him with the Rage!");
                 Console.ReadKey();
             }
@@ -27,12 +29,13 @@ namespace Domain.Repositories.Attacks
             {
                 Console.WriteLine("You killed this one, Good Job!");
                 Console.ReadKey();
-                gladiator.HealthPoints += gladiator.HealthPoints * 0.05;
+                gladiator.HealthPoints = Math.Round(gladiator.HealthPoints + gladiator.MaxHealthPoints * 0.25, 2);
                 gladiator.Experience += monster.ExperiencePrize;
                 if (gladiator.Experience > 80)
                 {
                     gladiator.Level++;
                     gladiator.HealthPoints += 10;
+                    gladiator.MaxHealthPoints += 10;
                     gladiator.DamagePoints += 3;
                     gladiator.Experience -= 80;
                 };

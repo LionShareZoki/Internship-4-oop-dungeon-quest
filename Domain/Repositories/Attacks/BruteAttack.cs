@@ -2,11 +2,13 @@
 using Data.Models.Heroes;
 using Data.Models.Monsters;
 
+using Domain.Repositories.Attack_Interfaces;
+
 namespace Domain.Repositories.Attacks
 {
-    public static class BruteAttack
+    public class BruteAttack : IBruteAttack
     {
-        public static void PerformBruteAttack(Hero hero, Brute brute)
+        public void PerformBruteAttack(Hero hero, Brute brute)
         {
             var damage = new Random().Next(0, 100) >= 10 ? brute.DamagePoints : hero.HealthPoints * (brute.DamagePoints / 100);
             hero.HealthPoints -= damage;

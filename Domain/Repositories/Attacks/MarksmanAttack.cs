@@ -1,11 +1,13 @@
 ﻿using Data.Models.Heros;
 using Data.Models.Monsters;
 
+using Domain.Repositories.Attack_Interfaces;
+
 namespace Domain.Repositories.Attacks
 {
-    public static class MarksmanAttack
+    public class MarksmanAttack : IMarksmanAttack
     {
-        public static void PerformMarksmanAttack(Marksman marksman, Monster monster)
+        public void PerformMarksmanAttack(Marksman marksman, Monster monster)
         {
             int randomChance1 = new Random().Next(0, 100);
 
@@ -17,35 +19,50 @@ namespace Domain.Repositories.Attacks
             bool isStun = randomChance2 <= marksman.StunChance;
 
             int damage = CalculateMarksmanDamage(marksman, isCritical);
-            if (isCritical) Console.WriteLine("Critical strike!");
-            Console.ReadKey();
-            if (isStun) Console.WriteLine("You stunned the monster!");
-            Console.ReadKey();
+            if (isCritical)
+            {
+                Console.WriteLine("Critical strike!");
+                Console.ReadLine();
+            }
+            if (isStun)
+            {
+                Console.WriteLine("You stunned the monster!");
+                Console.ReadKey();
+                monster.IsStunned = true;
+            }
             Console.WriteLine($"You gave him {damage} damage");
             Console.ReadKey();
             monster.HealthPoints -= damage;
 
-            if (isStun)
-            {
-                monster.IsStunned = true;
-            }
-            else if (monster.HealthPoints <= 0)
+
+            if (monster.HealthPoints <= 0)
             {
                 Console.WriteLine("You killed this one, Good Job!");
                 Console.ReadKey();
-                marksman.HealthPoints += marksman.HealthPoints * 0.05;
+                marksman.HealthPoints = Math.Round(marksman.HealthPoints + marksman.MaxHealthPoints * 0.25, 2);
                 marksman.Experience += monster.ExperiencePrize;
                 if (marksman.Experience > 80)
                 {
                     marksman.Level++;
                     marksman.HealthPoints += 10;
+                    marksman.MaxHealthPoints += 10;
                     marksman.DamagePoints += 10;
                     marksman.Experience -= 80;
+                    marksman.CriticalChance += 5;
+                    marksman.StunChance += 5;
                 }
             }
+            if (isStun && monster.HealthPoints > 0)
+            {
+                monster.IsStunned = true;
+                Console.WriteLine("Since the monster is stunned, you are attacking again!");
+                PerformMarksmanAttack(marksman, monster);
+                monster.IsStunned = false;
+            }
+
         }
 
-        private static int CalculateMarksmanDamage(Marksman marksman, bool isCritical)
+        private int CalculateMarksmanDamage(Marksman marksman, bool isCritical)
         {
             int baseDamage = marksman.DamagePoints;
             int totalDamage = isCritical ? baseDamage * 2 : baseDamage;
