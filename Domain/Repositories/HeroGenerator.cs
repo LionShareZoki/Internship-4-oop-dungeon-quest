@@ -47,7 +47,7 @@ namespace Data.Repositories
                     }
                     else
                     {
-                        var hp = new Random().Next(120, 130);
+                        var hp = new Random().Next(80, 90);
                         heroE.HealthPoints = hp;
                         heroE.MaxHealthPoints = hp;
                     }
@@ -71,7 +71,7 @@ namespace Data.Repositories
                     }
                     else
                     {
-                        var hp = new Random().Next(120, 130);
+                        var hp = new Random().Next(100, 105);
                         heroM.HealthPoints = hp;
                         heroM.MaxHealthPoints = hp;
                     }

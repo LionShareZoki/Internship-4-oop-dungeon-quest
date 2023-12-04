@@ -24,7 +24,7 @@ namespace Domain.Repositories.Attacks
                         Console.WriteLine("You killed this one, Good Job!");
                         Console.ReadKey();
                         enchanter.HealthPoints = Math.Round(enchanter.HealthPoints + enchanter.MaxHealthPoints * 0.25, 2);
-                        enchanter.Mana += 50;
+                        enchanter.Mana += 25;
                         enchanter.Experience += monster.ExperiencePrize;
                         if (enchanter.Experience > 80)
                         {
@@ -39,10 +39,11 @@ namespace Domain.Repositories.Attacks
                 }
                 else
                 {
-                    if (enchanter.HealthPoints < 30 && enchanter.Mana >= 3 && randomChance <= 10)
+                    if (enchanter.HealthPoints < 30 && enchanter.Mana >= 10 && randomChance <= 10)
                     {
                         enchanter.Mana -= 10;
                         enchanter.HealthPoints += 15;
+                        enchanter.MaxHealthPoints += 15;
                         Console.WriteLine("Since you were with health, you were recharged for some mana");
                         Console.ReadKey();
                     }
