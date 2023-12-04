@@ -5,17 +5,31 @@ using Data.Repositories;
 using Domain.Repositories;
 using Domain.Services;
 
+using Presentation.Interfaces;
+
 namespace Presentation.Classes
 {
-    internal class Round
+    internal class Round : IRound
     {
-        public static void RoundAction(List<Monster> monsters)
+        public void RoundAction(List<Monster> monsters)
         {
+            var hero = HeroGenerator.createdHeroes[0];
             Console.Clear();
             while (HeroGenerator.createdHeroes[0].HealthPoints > 0 && monsters.Count > 0)
             {
+                if (hero.Experience >= 20 && hero.MaxHealthPoints < hero.MaxHealthPoints * 0.5)
+                {
+                    Console.WriteLine("Do you want to buy your full HP for half of your XP?(Y/N)");
+                    var answer = Console.ReadLine().ToUpper();
+                    BuyHP buyHp = new BuyHP(hero);
+                    if (answer is "Y")
+                    {
+                        buyHp.BuyHealthPoints(hero);
+                    }
+                }
                 Console.Clear();
-                GameMonitor.GameDataMonitor(HeroGenerator.createdHeroes[0], monsters);
+                var gameMonitor = new GameMonitor();
+                gameMonitor.GameDataMonitor(hero, monsters);
                 Console.WriteLine("It's your turn to play: Direct, Side, or Counter");
                 var heroChoice = Console.ReadLine();
 
@@ -44,17 +58,18 @@ namespace Presentation.Classes
                 }
                 else if ((attackChoice == Attack.Direct && monsterChoice == Attack.Side) || (attackChoice == Attack.Side && monsterChoice == Attack.Counter) || (attackChoice == Attack.Counter && monsterChoice == Attack.Direct))
                 {
-                    heroOrMonster = false;
-                    Console.WriteLine($"{HeroGenerator.createdHeroes[0].Name} attacking...");
+                    Console.WriteLine("You are attacking...");
                     Console.ReadKey();
-                    var gameService = new GameService(HeroGenerator.createdHeroes[0], monsters, new MonstersGenerator(), heroOrMonster);
+                    heroOrMonster = false;
+                    var gameService = new GameService();
+                    gameService.PlayGame(hero, monsters, new MonstersGenerator(), heroOrMonster);
                 }
                 else if ((monsterChoice == Attack.Direct && attackChoice == Attack.Side) || (monsterChoice == Attack.Side && attackChoice == Attack.Counter) || (monsterChoice == Attack.Counter && attackChoice == Attack.Direct))
                 {
-                    heroOrMonster = true;
                     Console.WriteLine($"{monsters[0].Name} attacking...");
-                    Console.ReadKey();
-                    var gameService = new GameService(HeroGenerator.createdHeroes[0], monsters, new MonstersGenerator(), heroOrMonster);
+                    heroOrMonster = true;
+                    var gameService = new GameService();
+                    gameService.PlayGame(hero, monsters, new MonstersGenerator(), heroOrMonster);
                 }
             }
         }

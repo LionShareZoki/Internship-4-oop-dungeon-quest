@@ -7,12 +7,12 @@ using Domain.Repositories.Attacks;
 
 namespace Domain.Services
 {
-    public class GameService
+    public class GameService : IGameService
     {
         private List<Monster> monsters;
         private MonstersGenerator monstersGenerator;
 
-        public GameService(Hero hero, List<Monster> monsters, MonstersGenerator monstersGenerator, bool hasWon)
+        public void PlayGame(Hero hero, List<Monster> monsters, MonstersGenerator monstersGenerator, bool hasWon)
         {
             this.monsters = monsters;
             this.monstersGenerator = monstersGenerator;
@@ -20,10 +20,19 @@ namespace Domain.Services
             if (monsters.Count > 0)
             {
                 Monster firstMonster = monsters[0];
+                var gladiatorAttack = new GladiatorAttack();
+                var enchanterAttack = new EnchanterAttack();
+                var marksmanAttack = new MarksmanAttack();
+
+                var goblinAttack = new GoblinAttack();
+                var bruteAttack = new BruteAttack();
+                var witchAttack = new WitchAttack();
+
+
 
                 if (hero is Gladiator gladiator && !hasWon)
                 {
-                    GladiatorAttack.GetGladiatorAttackDamage(gladiator, firstMonster);
+                    gladiatorAttack.GetGladiatorAttackDamage(gladiator, firstMonster);
                     if (firstMonster.HealthPoints <= 0)
                     {
                         monsters.Remove(firstMonster);
@@ -39,7 +48,7 @@ namespace Domain.Services
 
                 if (hero is Enchanter enchanter && !hasWon)
                 {
-                    EnchanterAttack.PerformEnchanterAttack(enchanter, firstMonster);
+                    enchanterAttack.PerformEnchanterAttack(enchanter, firstMonster);
                     if (firstMonster.HealthPoints <= 0)
                     {
                         monsters.Remove(firstMonster);
@@ -55,7 +64,7 @@ namespace Domain.Services
 
                 if (hero is Marksman marksman && !hasWon)
                 {
-                    MarksmanAttack.PerformMarksmanAttack(marksman, firstMonster);
+                    marksmanAttack.PerformMarksmanAttack(marksman, firstMonster);
                     if (firstMonster.HealthPoints <= 0)
                     {
                         monsters.Remove(firstMonster);
@@ -71,7 +80,7 @@ namespace Domain.Services
 
                 if (firstMonster is Goblin goblin && hasWon)
                 {
-                    GoblinAttack.PerformGoblinAttack(hero, goblin);
+                    goblinAttack.PerformGoblinAttack(hero, goblin);
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {
@@ -89,7 +98,7 @@ namespace Domain.Services
 
                 if (firstMonster is Brute brute && hasWon)
                 {
-                    BruteAttack.PerformBruteAttack(hero, brute);
+                    bruteAttack.PerformBruteAttack(hero, brute);
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {
@@ -108,7 +117,7 @@ namespace Domain.Services
 
                 if (firstMonster is Witch witch && hasWon)
                 {
-                    WitchAttack.PerformWitchAttack(hero, witch, monsters, monstersGenerator);
+                    witchAttack.PerformWitchAttack(hero, witch, monsters, monstersGenerator);
                     if (hero is not Enchanter && hero.HealthPoints <= 0) Console.WriteLine("You lost");
                     if (hero is Enchanter someEnchanter && hero.HealthPoints <= 0)
                     {

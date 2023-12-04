@@ -1,16 +1,25 @@
 ﻿using Data.Models.Heroes;
+using Data.Models.Heros;
 using Data.Models.Monsters;
+
+using Presentation.Interfaces;
 
 namespace Presentation.Classes
 {
-    internal class GameMonitor
+    internal class GameMonitor : IGameMonitor
     {
-        public static void GameDataMonitor(Hero hero, List<Monster> monsters)
+        public void GameDataMonitor(Hero hero, List<Monster> monsters)
         {
             Console.WriteLine($"{hero.Name}:");
             Console.WriteLine("");
             Console.WriteLine($"HP: {hero.HealthPoints}");
             Console.WriteLine($"Damage: {hero.DamagePoints}");
+            if (hero is Enchanter enchanter) Console.WriteLine($"Mana: {enchanter.Mana}");
+            if (hero is Marksman marksman)
+            {
+                Console.WriteLine($"Critical chance: {marksman.CriticalChance}");
+                Console.WriteLine($"Critical chance: {marksman.CriticalChance}");
+            }
             Console.WriteLine($"XP: {hero.Experience}");
             Console.WriteLine($"Level: {hero.Level}");
             Console.WriteLine("------------------");

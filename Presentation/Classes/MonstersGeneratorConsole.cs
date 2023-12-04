@@ -2,9 +2,10 @@
 
 using Domain.Repositories;
 
+using Presentation.Interfaces;
 using Presentation.Repositories;
 
-public class MonsterConsole
+public class MonsterConsole : IMonstersGeneratorConsole
 {
     private readonly ConsoleHelper consoleHelper;
     private readonly MonstersGenerator monstersGenerator;

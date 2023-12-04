@@ -18,7 +18,7 @@ namespace HeroGeneratorConsole
 
             var mainMenuOptions = new Dictionary<int, Action>
             {
-                { 1, () => CreateHeroAndGenerateMonsters(consoleHelper) },
+                { 1, () => Play(consoleHelper) },
                 { 2, ExitGame }
             };
 
@@ -28,13 +28,20 @@ namespace HeroGeneratorConsole
             }
         }
 
-        private static void CreateHeroAndGenerateMonsters(ConsoleHelper consoleHelper)
+        private static void Play(ConsoleHelper consoleHelper)
         {
+            var finishedGameOptions = new Dictionary<int, Action>
+            {   {1,() => Play(consoleHelper) },
+                { 2, ExitGame },
+            };
+
             GenerateHero(consoleHelper);
 
             MonsterConsole monsterConsole = new MonsterConsole();
             List<Monster> monsters = monsterConsole.RunMonsterConsole();
-            Round.RoundAction(monsters);
+            var round = new Round();
+            round.RoundAction(monsters);
+            consoleHelper.PrintMenu(finishedGameOptions, "Do you want to play again? (1-yes/2-no)");
         }
 
         private static void GenerateHero(ConsoleHelper consoleHelper)
@@ -73,6 +80,7 @@ namespace HeroGeneratorConsole
 
         private static void ExitGame()
         {
+            Console.Clear();
             Console.WriteLine("Exiting the game. Goodbye!");
             Environment.Exit(0);
         }
